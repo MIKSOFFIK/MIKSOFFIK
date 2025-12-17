@@ -19,7 +19,7 @@
     <header>
         <div class="container header-content">
             <div class="logo">Ассинизаторское<span>Братство</span></div>
-            <button class="mobile-menu-btn">
+            <button class="mobile-menu-btn" id="mobile_menu">
                 <i class="fas fa-bars"></i>
             </button>
             <nav>
@@ -33,7 +33,6 @@
         </div>
     </header>
 
-    <!-- Герой-секция -->
     <section class="hero" id="home">
         <div class="container">
             <h1>Профессиональные ассинизаторные услуги</h1>
@@ -237,58 +236,41 @@
             </div>
         </div>
     </footer>
+
 <script>
-        // Мобильное меню
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('nav ul');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Закрытие меню при клике на ссылку
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
-        
-        // Обработка формы
-        const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            
-            // В реальном проекте здесь был бы AJAX запрос к серверу
-            //alert("Спасибо, ${name}! Ваша заявка принята. Мы свяжемся с вами по номеру ${phone} в ближайшее время.");
-            alert("в разработке ! \nсвяжитсь по намерам");
-            contactForm.reset();
-        });
-        
-        // Плавная прокрутка
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileMenuBtn = document.getElementById('mobile_menu');
+  const navMenu = document.querySelector('nav ul');
+
+  if (!mobileMenuBtn) { console.warn('no #mobile_menu'); return; }
+  if (!navMenu) { console.warn('no nav ul'); return; }
+
+  mobileMenuBtn.style.zIndex = mobileMenuBtn.style.zIndex || '1000';
+
+  mobileMenuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    navMenu.classList.toggle('active');
+    mobileMenuBtn.innerHTML = navMenu.classList.contains('active')
+      ? '<i class="fas fa-times"></i>'
+      : '<i class="fas fa-bars"></i>';
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!navMenu.classList.contains('active')) return;
+    if (!e.target.closest('nav') && !e.target.closest('#mobileMenuBtn')) {
+      navMenu.classList.remove('active');
+      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    }
+  });
+
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    });
+  });
+});
+</script>
+
 </body>
 </html>
