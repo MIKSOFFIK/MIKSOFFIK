@@ -345,6 +345,38 @@ footer {
     font-size: 0.9rem;
 }
 
+.output {
+  padding: 2px 4px;
+  border: 2px solid #ffcc00;
+  border-radius: 3px;
+}
+
+.range {
+  width: 200px;
+  height: 12px;
+  margin: 0;
+  background-color: #f1c40f88;
+  border-radius: 4px;
+  appearance: none;
+}
+
+.range::-webkit-slider-thumb {
+  width: 10px;
+  height: 10px;
+  background-color: #ff9900;
+  appearance: none;
+  border-radius: 5px;
+}
+
+.range::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background-color: #f1c40f;
+  appearance: none;
+  border: 1px;
+  border-radius: 0;
+}
+
 /* Адаптивность */
 @media (max-width: 992px) {
     .about-content {

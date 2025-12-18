@@ -11,7 +11,7 @@
     <title>Профессиональные ассинизаторные услуги - мастер Назар и компания</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/lib/style.css">
+    <link rel="stylesheet" href="./lib/style.css">
 
 </head>
 <body>
@@ -184,6 +184,32 @@
                         <textarea id="message" placeholder="Опишите проблему или необходимую услугу..."></textarea>
                     </div>
                     <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
+
+                <div class="contact-form">
+                <hr style="color:#30485f; size:1rem; border-radius: 5px;">
+                <h3 style="text-align: center; margin-bottom: 30px; color: #283746;">Оставить отзыв</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="range-wrap no-js">
+                        <label for="range" class="range-label">Ваша оценка</label>
+                        <input type="range" id="range_mark" class="range" value="5" min="0" max="10">
+                        <output name="value" class="output" for="range"></output>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" placeholder="напишите отзыв..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 80%;">Отправить отзыв</button>
+
                 </form>
             </div>
         </div>
@@ -310,6 +336,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+const range = document.querySelector('.range');
+const output = document.querySelector('.output');
+
+const onRangeInput = () => {
+  const value = range.value;
+  output.value = value;
+};
+
+onRangeInput();
+range.addEventListener('input', onRangeInput);
 </script>
 
 </body>
